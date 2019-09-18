@@ -1,0 +1,33 @@
+<#
+查询Azure区域包含的镜像
+本脚本适用于Az PowerShell 2.6.0
+作者xpxing
+创建于2019.9.17
+修改于2019.9.18
+#>
+
+Connect-AzAccount
+Connect-AzAccount -Environment azurechinacloud
+#以上是登录国际和CN Azure#
+
+Get-AzVMImagePublisher -Location 'japanwest' | Get-AzVMImageOffer | Get-AzVMImageSku | Get-AzVMImage | Out-GridView
+
+Get-AzVMImage -location "japanwest" `
+                   -publisherName "MicrosoftWindowsServer" `
+                   -sku "2019-Datacenter" `
+                   -Offer WindowsServer | Out-GridView
+#以上为日本西部的国际Azure举例#
+
+Get-AzVMImagePublisher -Location 'chinaeast2' | Get-AzVMImageOffer | Get-AzVMImageSku | Get-AzVMImage | Out-GridView
+
+Get-AzVMImage -location "chinaeast2" `
+                   -publisherName "MicrosoftWindowsServer" `
+                   -sku "2016-Datacenter" `
+                   -Offer WindowsServer | Out-GridView
+
+Get-AzVMImage -location "chinaeast2" `
+                   -publisherName "OpenLogic" `
+                   -sku "7.6" `
+                   -Offer CentOS | Out-GridView
+
+#以上是中国东2Azure举例#
